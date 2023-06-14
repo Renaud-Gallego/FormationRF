@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0.2 (Python 3.11.3 on win32)" generated="20230614 11:55:43.970" rpa="true" schemaversion="3">
+<suite id="s1" name="test AI" source="c:\Users\Formation\Repos\RF2\test AI.robot">
+<test id="s1-t1" name="Create a text completion" line="9">
+<kw name="Authorize To Openai" library="RPA.OpenAI">
+<arg>${api_key}</arg>
+<doc>Keyword for authorize to OpenAI with your API key obtained from your account.</doc>
+<status status="PASS" starttime="20230614 11:55:44.459" endtime="20230614 11:55:44.460"/>
+</kw>
+<kw name="Completion Create" library="RPA.OpenAI">
+<var>${completion}</var>
+<arg>Write robotframework script to test GET request of https://jsonplaceholder.typicode.com/posts using libraries RequestsLibrary and JSONLibrary</arg>
+<arg>temperature=0.6</arg>
+<doc>Keyword for creating text completions in OpenAI and Azure OpenAI.
+Keyword returns a text string.</doc>
+<msg timestamp="20230614 11:55:50.152" level="INFO">{
+  "id": "cmpl-7RHW4HpKfWpnKsMeoxIwg6jTfqScp",
+  "object": "text_completion",
+  "created": 1686736544,
+  "model": "text-davinci-003",
+  "choices": [
+    {
+      "text": "\n\n*** Settings ***\nLibrary           RequestsLibrary\nLibrary           JSONLibrary\n\n*** Variables ***\n${url}           https://jsonplaceholder.typicode.com/posts\n\n*** Test Cases ***\nTest GET Request\n    Create Session    test_session    ${url}\n    ${resp}=    Get Request    test_session\n    Should Be Equal As Strings    ${resp.status_code}    200\n    ${json}=    To Json    ${resp.text}\n    Should Be Equal As Strings    ${json[0]['title']}    sunt aut facere repellat provident occaecati excepturi optio reprehenderit\n    Delete All Sessions",
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 30,
+    "completion_tokens": 156,
+    "total_tokens": 186
+  }
+}</msg>
+<msg timestamp="20230614 11:55:50.154" level="INFO">${completion} = *** Settings ***
+Library           RequestsLibrary
+Library           JSONLibrary
+
+*** Variables ***
+${url}           https://jsonplaceholder.typicode.com/posts
+
+*** Test Cases ***
+Test GET Request
+   ...</msg>
+<status status="PASS" starttime="20230614 11:55:44.460" endtime="20230614 11:55:50.154"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${completion}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230614 11:55:50.156" level="INFO">*** Settings ***
+Library           RequestsLibrary
+Library           JSONLibrary
+
+*** Variables ***
+${url}           https://jsonplaceholder.typicode.com/posts
+
+*** Test Cases ***
+Test GET Request
+    Create Session    test_session    ${url}
+    ${resp}=    Get Request    test_session
+    Should Be Equal As Strings    ${resp.status_code}    200
+    ${json}=    To Json    ${resp.text}
+    Should Be Equal As Strings    ${json[0]['title']}    sunt aut facere repellat provident occaecati excepturi optio reprehenderit
+    Delete All Sessions</msg>
+<status status="PASS" starttime="20230614 11:55:50.155" endtime="20230614 11:55:50.156"/>
+</kw>
+<status status="PASS" starttime="20230614 11:55:44.458" endtime="20230614 11:55:50.157"/>
+</test>
+<status status="PASS" starttime="20230614 11:55:43.977" endtime="20230614 11:55:50.159"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tasks</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="test AI">test AI</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

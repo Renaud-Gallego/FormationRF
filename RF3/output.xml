@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0.2 (Python 3.11.3 on win32)" generated="20230614 14:43:34.350" rpa="false" schemaversion="3">
+<suite id="s1" name="demo API" source="c:\Users\Formation\Repos\RF3\demo API.robot">
+<test id="s1-t1" name="Envoi requête POST" line="78">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${endpoint}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230614 14:43:34.615" level="INFO">Creating Session using : alias=mysession, url=https://jsonplaceholder.typicode.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230614 14:43:34.614" endtime="20230614 14:43:34.618"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${data}</var>
+<arg>userId=25</arg>
+<arg>id=30</arg>
+<arg>title=titre de l'entrée de renaud</arg>
+<arg>body=corps de l'entrée de renaud</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230614 14:43:34.619" level="INFO">${data} = {'userId': '25', 'id': '30', 'title': "titre de l'entrée de renaud", 'body': "corps de l'entrée de renaud"}</msg>
+<status status="PASS" starttime="20230614 14:43:34.618" endtime="20230614 14:43:34.620"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${Réponse}</var>
+<arg>mysession</arg>
+<arg>${endpoint}${service1}</arg>
+<arg>json=${data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20230614 14:43:35.002" level="INFO">POST Request : url=https://jsonplaceholder.typicode.com/posts 
+ path_url=/posts 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '117', 'Content-Type': 'application/json'} 
+ body=b'{"userId": "25", "id": "30", "title": "titre de l\'entr\\u00e9e de renaud", "body": "corps de l\'entr\\u00e9e de renaud"}' 
+ </msg>
+<msg timestamp="20230614 14:43:35.003" level="INFO">POST Response : url=https://jsonplaceholder.typicode.com/posts 
+ status=201, reason=Created 
+ headers={'Date': 'Wed, 14 Jun 2023 12:43:34 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '118', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'X-Ratelimit-Limit': '1000', 'X-Ratelimit-Remaining': '999', 'X-Ratelimit-Reset': '1686746668', 'Vary': 'Origin, X-HTTP-Method-Override, Accept-Encoding', 'Access-Control-Allow-Credentials': 'true', 'Cache-Control': 'no-cache', 'Pragma': 'no-cache', 'Expires': '-1', 'Access-Control-Expose-Headers': 'Location', 'Location': 'http://jsonplaceholder.typicode.com/posts/101', 'X-Content-Type-Options': 'nosniff', 'Etag': 'W/"76-U2waC1SJBfr6fjos5uqdO12wpCE"', 'Via': '1.1 vegur', 'CF-Cache-Status': 'DYNAMIC', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=36blw6btckIlBjRd%2F0vr0ahdzJIzibxqGgenJiOwkEL4RS1dVU2i10sNLuuc7F1tR6I8spb%2BqD0inTMvRYTxztw85sMo3pd8WSsAqYeouvTB6%2FPpQ8tGZuPRTNo9x4m1OLJuKjX2GvV9rJRm6ow%3D"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'CF-RAY': '7d72a8e6af65f0af-CDG'} 
+ body={
+  "userId": "25",
+  "id": 101,
+  "title": "titre de l'entrée de renaud",
+  "body": "corps de l'entrée de renaud"
+} 
+ </msg>
+<msg timestamp="20230614 14:43:35.004" level="INFO">C:\Users\Formation\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py:1095: InsecureRequestWarning: Unverified HTTPS request is being made to host 'jsonplaceholder.typicode.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg timestamp="20230614 14:43:35.009" level="INFO">${Réponse} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20230614 14:43:34.621" endtime="20230614 14:43:35.010"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${Réponse.status_code}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230614 14:43:35.011" level="INFO">201</msg>
+<status status="PASS" starttime="20230614 14:43:35.011" endtime="20230614 14:43:35.011"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${Réponse.reason}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230614 14:43:35.013" level="INFO">Created</msg>
+<status status="PASS" starttime="20230614 14:43:35.012" endtime="20230614 14:43:35.013"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${Réponse.headers}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230614 14:43:35.014" level="INFO">{'Date': 'Wed, 14 Jun 2023 12:43:34 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '118', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'X-Ratelimit-Limit': '1000', 'X-Ratelimit-Remaining': '999', 'X-Ratelimit-Reset': '1686746668', 'Vary': 'Origin, X-HTTP-Method-Override, Accept-Encoding', 'Access-Control-Allow-Credentials': 'true', 'Cache-Control': 'no-cache', 'Pragma': 'no-cache', 'Expires': '-1', 'Access-Control-Expose-Headers': 'Location', 'Location': 'http://jsonplaceholder.typicode.com/posts/101', 'X-Content-Type-Options': 'nosniff', 'Etag': 'W/"76-U2waC1SJBfr6fjos5uqdO12wpCE"', 'Via': '1.1 vegur', 'CF-Cache-Status': 'DYNAMIC', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=36blw6btckIlBjRd%2F0vr0ahdzJIzibxqGgenJiOwkEL4RS1dVU2i10sNLuuc7F1tR6I8spb%2BqD0inTMvRYTxztw85sMo3pd8WSsAqYeouvTB6%2FPpQ8tGZuPRTNo9x4m1OLJuKjX2GvV9rJRm6ow%3D"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'CF-RAY': '7d72a8e6af65f0af-CDG'}</msg>
+<status status="PASS" starttime="20230614 14:43:35.013" endtime="20230614 14:43:35.014"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${Réponse.content}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230614 14:43:35.015" level="INFO">{
+  "userId": "25",
+  "id": 101,
+  "title": "titre de l'entr\xc3\xa9e de renaud",
+  "body": "corps de l'entr\xc3\xa9e de renaud"
+}</msg>
+<status status="PASS" starttime="20230614 14:43:35.015" endtime="20230614 14:43:35.015"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${Réponse.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230614 14:43:35.017" level="INFO">{'userId': '25', 'id': 101, 'title': "titre de l'entrée de renaud", 'body': "corps de l'entrée de renaud"}</msg>
+<status status="PASS" starttime="20230614 14:43:35.016" endtime="20230614 14:43:35.017"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${Réponse.status_code}</arg>
+<arg>${integer_status_code_Created}</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" starttime="20230614 14:43:35.018" endtime="20230614 14:43:35.020"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${Réponse.reason}</arg>
+<arg>${integer_reason_Created}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230614 14:43:35.021" endtime="20230614 14:43:35.022"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${Réponse.json()}[userId]</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230614 14:43:35.025" level="INFO">25</msg>
+<status status="PASS" starttime="20230614 14:43:35.024" endtime="20230614 14:43:35.025"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${Réponse.json()}[id]</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230614 14:43:35.026" level="INFO">101</msg>
+<status status="PASS" starttime="20230614 14:43:35.025" endtime="20230614 14:43:35.026"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${Réponse.json()}[title]</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230614 14:43:35.028" level="INFO">titre de l'entrée de renaud</msg>
+<status status="PASS" starttime="20230614 14:43:35.027" endtime="20230614 14:43:35.028"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${Réponse.json()}[body]</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230614 14:43:35.029" level="INFO">corps de l'entrée de renaud</msg>
+<status status="PASS" starttime="20230614 14:43:35.028" endtime="20230614 14:43:35.030"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${data.userId}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230614 14:43:35.031" level="INFO">25</msg>
+<status status="PASS" starttime="20230614 14:43:35.030" endtime="20230614 14:43:35.032"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${data.id}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230614 14:43:35.033" level="INFO">30</msg>
+<status status="PASS" starttime="20230614 14:43:35.033" endtime="20230614 14:43:35.034"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${data.title}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230614 14:43:35.036" level="INFO">titre de l'entrée de renaud</msg>
+<status status="PASS" starttime="20230614 14:43:35.034" endtime="20230614 14:43:35.036"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${data.body}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230614 14:43:35.038" level="INFO">corps de l'entrée de renaud</msg>
+<status status="PASS" starttime="20230614 14:43:35.037" endtime="20230614 14:43:35.038"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${Réponse.json()}[userId]</arg>
+<arg>${data.userId}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230614 14:43:35.039" endtime="20230614 14:43:35.041"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${Réponse.json()}[id]</arg>
+<arg>${data.id}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<msg timestamp="20230614 14:43:35.045" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<msg timestamp="20230614 14:43:35.045" level="FAIL">101 != 30</msg>
+<status status="FAIL" starttime="20230614 14:43:35.042" endtime="20230614 14:43:35.047"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${Réponse.json()}[title]</arg>
+<arg>${data.title}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" starttime="20230614 14:43:35.048" endtime="20230614 14:43:35.048"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${Réponse.json()}[body]</arg>
+<arg>${data.body}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" starttime="20230614 14:43:35.049" endtime="20230614 14:43:35.050"/>
+</kw>
+<status status="FAIL" starttime="20230614 14:43:34.613" endtime="20230614 14:43:35.050">101 != 30</status>
+</test>
+<status status="FAIL" starttime="20230614 14:43:34.357" endtime="20230614 14:43:35.053"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="demo API">demo API</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
