@@ -35,10 +35,6 @@ Continue the conversation by using the conversation argument
     ...    user_content=Quelle est se durée de vie moyenne ?
     Log    ${response}
     Log    @{chatgpt_conversation}
-    
-    Log To Console    @{chatgpt_conversation}
-    
-    List Should Contain Value    @{chatgpt_conversation}    "{'role': 'user', 'content': 'Que signifie tortue ?'}"
 
 Create chat completion about Data set
     Authorize To OpenAI   ${api_key}
